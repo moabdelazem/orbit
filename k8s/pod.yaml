@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: orbit-pod
+  labels:
+    app.kubernetes.io/name: orbit
+    app.kubernetes.io/instance: orbit-pod
+    app.kubernetes.io/version: "1.0"
+  annotations:
+    app.kubernetes.io/created-by: "moabdelazem"
+spec:
+  containers:
+    - name: orbit-container
+      image: moabdelazem/orbit:latest
+      ports:
+        - containerPort: 8080
+      resources:
+        requests:
+          memory: "128Mi"
+          cpu: "250m"
+        limits:
+          memory: "256Mi"
+          cpu: "500m"
+      livenessProbe:
+        httpGet:
+          path: /health
+          port: 8080
+        initialDelaySeconds: 3
+        periodSeconds: 3
+        timeoutSeconds: 1
+        successThreshold: 1
+        failureThreshold: 3
