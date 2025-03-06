@@ -74,6 +74,14 @@ install-deps:
 	$(GOGET) github.com/cosmtrek/air
 	$(GOGET) github.com/golangci/golangci-lint/cmd/golangci-lint
 
+apply-pod:
+	@echo "Applying pod..."
+	kubectl apply -f k8s/pod.yaml
+
+delete-pod:
+	@echo "Deleting pod..."
+	kubectl delete -f k8s/pod.yaml
+
 help:
 	@echo "Available commands:"
 	@echo "  make build            - Build the application"
@@ -89,3 +97,4 @@ help:
 	@echo "  make mod-download     - Download Go modules"
 	@echo "  make dev              - Run in development mode with hot reload"
 	@echo "  make install-deps     - Install development dependencies"
+	@echo "  make apply-pod        - Apply pod to Kubernetes cluster"
