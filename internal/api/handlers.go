@@ -57,7 +57,7 @@ func (h *Handler) HealthHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	h.logger.Println("Health check performed")
-	utils.WriteJSON(w, response, http.StatusOK)
+	utils.WriteJSON(w, response, http.StatusOK, h.logger)
 }
 
 // StatusHandler provides detailed system status
@@ -71,7 +71,7 @@ func (h *Handler) StatusHandler(w http.ResponseWriter, r *http.Request) {
 		},
 	}
 
-	utils.WriteJSON(w, status, http.StatusOK)
+	utils.WriteJSON(w, status, http.StatusOK, h.logger)
 }
 
 // loggingMiddleware logs HTTP requests
